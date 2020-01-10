@@ -38,9 +38,9 @@ Base2Image = pygame.image.load("img/Base2.png")
 
 
 #Creates the base objects with custom location and images (Still need to put in location)
-Base1 = Base(Base1Image, 300, 200)
+Base1 = Base(Base1Image, 30, 170)
 
-Base2 = Base(Base2Image, 1000, 200)
+Base2 = Base(Base2Image, 1100, 170)
 
 
 # Create a display. Size must be a tuple, which is why it's in parentheses
