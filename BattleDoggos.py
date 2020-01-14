@@ -6,6 +6,9 @@ import time
 # Initialize pygame so it runs in the background and manages things
 pygame.init()
 
+# Create a display. Size must be a tuple, which is why it's in parentheses
+screen = pygame.display.set_mode( (1300, 560) )
+
 #Load the image of the battlefield
 background = pygame.image.load("img/BDField.png")
 backgroundrect = background.get_rect()
@@ -37,12 +40,24 @@ class Player:
 
     #Make sure that the defense is the enemy player defense. Health is the enemy Health. 
     #this is activated when the player attacks (Right clicks) while colliding with the other player
-    #still need to put the collision code it
+    #still need to put the player collision code it
+    """
     def damage(health, defense, attack):
         #If colliding and left click is pressed:
         damage = attack - defense
         health - damage
+        """
         
+#Images for Player 1 and 2
+
+Player1Image = pygame.image.load("img/Player1Image.png")
+Player2Image = pygame.image.load("img/Player2Image.png")
+
+
+#Loads the players in their starting positions and with their stats
+Player1 = Player(Player1Image, 300, 310, 6, 6, 6)
+Player2 = Player(Player2Image, 700, 310, 6, 6, 6)
+
 
 #Images for base 1 and 2
 Base1Image = pygame.image.load("img/Base1.png")
@@ -50,15 +65,9 @@ Base1Image = pygame.image.load("img/Base1.png")
 Base2Image = pygame.image.load("img/Base2.png")
 
 
-
 #Creates the base objects with custom location and images (Still need to put in location)
-Base1 = Base(Base1Image, 30, 170)
+Base1 = Base(Base1Image, 2, 170)
 Base2 = Base(Base2Image, 1100, 170)
-
-
-
-# Create a display. Size must be a tuple, which is why it's in parentheses
-screen = pygame.display.set_mode( (1300, 560) )
 
 # Main loop. Your game would go inside this loop
 while True:
@@ -69,24 +78,38 @@ while True:
 
             # If so, exit the program
             sys.exit()
+        #keydown and stuff if event.type == 
 
 
     #Draw the background, and bases in certain positions
     screen.blit(background, backgroundrect)
     screen.blit(Base1Image, Base1.rect)
     screen.blit(Base2Image, Base2.rect)
+    screen.blit(Player1Image, Player1.rect)
+    screen.blit(Player2Image, Player2.rect)
     pygame.display.flip()
 
-    #GameMechanics
 
     #Movement
-    
-    #Collision Code
+
+
+
+
+    #Player collision Code
+
 
 
     #Damage to other player
 
-    #
+
+
+    #Heal?
+
+
+
+
+
+    
 
 
 
