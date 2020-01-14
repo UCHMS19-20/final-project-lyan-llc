@@ -14,7 +14,7 @@ screen = pygame.display.set_mode( (1350, 650) )
 white = pygame.Color(255, 255, 255)
 black = pygame.Color(0, 0, 0)
 
-# Create font object
+# Create font objects
 big_font = pygame.font.SysFont("Comicsansms", 75)
 medium_font = pygame.font.SysFont("Comicsansms", 50)
 little_font = pygame.font.SysFont("Comicsansms", 25)
@@ -23,15 +23,14 @@ little_font = pygame.font.SysFont("Comicsansms", 25)
 player1_text = big_font.render("PLAYER 1", True, white)
 click_text = little_font.render("Click the dice to get your stats!", True, white)
 
+# load images
 dice = pygame.image.load("img/red_dice.gif")
 abilities_BG = pygame.image.load("img/AbilitiesBG2.png")
-abilities_BG_rect = abilities_BG.get_rect()
 
 # Create button class
 class Button:
     def __init__(self, img, x, y):
-        # self.x = x
-        #self.y = y
+        '''Button is defined by rect and image, as well as if it is active'''
         self.img = img
         self.rect = self.img.get_rect()
         self.rect.x, self.rect.y = x, y
@@ -39,40 +38,45 @@ class Button:
         self.is_active = True
     
     def has_mouse(self):
-        """Return True if mouse is in button and False otherwise"""
+        '''Return True if mouse is in button and False otherwise'''
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             return True
         return False
     
     def roll_die(self):
-        # screen.blit((little_font.render(f"Dice rolling...", True, white)), (20, 200))
-        # pygame.time.wait(3000)
+        '''Return random integer between 0 and 6'''
         return random.randint(1,6)
 
+# create list of 3 buttons that look like the red dice
 dice_list = []
 for y in range(3):
     dice_list.append(Button(dice, 525, y * 200 + 160))
 
+# create blank list of 3 aspects of the dice (later to be abilities)
 dice_values = [0,0,0]
+
+#set initial value of if the dice is being rolled to False
 dice_rolling = False
 
 # Main loop. Your game would go inside this loop
 while True:
     # do something for each event in the event queue (list of things that happen)
     
+    # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
     if dice_rolling == True:
         screen.blit((medium_font.render(f"Dice rolling...", True, white)), (40, 200))
         pygame.display.flip()
         pygame.time.wait(3000)
+        # set back to False so the program doesn't pause again until another die is rolled
         dice_rolling = False 
 
     # display colors, images and text
     screen.fill((0,0,0))
     screen.blit(abilities_BG, (0,0))
-    
     screen.blit(player1_text, (800, 0))
     screen.blit(click_text, (800, 100))
     
+    # set the abilities to the values in the dice_values list
     attack, defense, health = dice_values
    
     screen.blit((little_font.render(f"Attack: {attack}", True, black)), (598, 180))
