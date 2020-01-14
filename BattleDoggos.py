@@ -55,10 +55,10 @@ for y in range(3):
 # create blank list of 3 aspects of the dice (later to be abilities)
 dice_values = [0,0,0]
 
-#set initial value of if the dice is being rolled to False
+# set initial value of if the dice is being rolled to False
 dice_rolling = False
 
-# Main loop. Your game would go inside this loop
+# main loop for the abilities screen
 while True:
     # do something for each event in the event queue (list of things that happen)
     
@@ -87,7 +87,7 @@ while True:
     screen.blit((little_font.render(f"Defense: {defense}", True, white)), (600, 380))
     screen.blit((little_font.render(f"Health: {health}", True, white)), (600, 580))
     
-    
+    # draw all three dice in the dice_list
     for d in dice_list:
             screen.blit(d.img, d.rect)
    
@@ -101,11 +101,14 @@ while True:
             # If so, exit the program
             sys.exit()
       
-        # check if mouse is pressing down on a button
+        # check if mouse is pressing down
         if event.type == pygame.MOUSEBUTTONDOWN:
+            # check if the mouse is on a button while it is pressing down
             for i in range(0, len(dice_list)):
                 if dice_list[i-2].has_mouse() and dice_list[i].is_active:
+                    # "roll die" and get a random number
                     dice_values[i-2] = dice_list[i].roll_die()
+                    # 
                     dice_rolling = True
                     print(f"Attack = {dice_values[0]}")
                     print(f"Defense = {dice_values[1]}")
