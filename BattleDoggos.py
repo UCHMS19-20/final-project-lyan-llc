@@ -42,6 +42,7 @@ class Player:
         self.defence = defense
         self.health = health
 
+    def inflict_damage(self)
 
     #Make sure that the defense is the enemy player defense. Health is the enemy Health. 
     #this is activated when the player attacks (Right clicks) while colliding with the other player
@@ -197,11 +198,12 @@ while True:
 
 
 
-    #Player collision Code
+    # check if players are colliding
+    if Player1.rect.colliderect(Player2.rect) == True:
+        print ("Players are colliding")
 
 
-
-    #Damage to other player
+         # damage to other player
 
 
 
