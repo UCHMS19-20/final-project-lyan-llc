@@ -39,10 +39,11 @@ class Player:
         self.rect.x = x
         self.rect.y = y
         self.attack = attack
-        self.defence = defense
+        self.defense = defense
         self.health = health
 
-    def inflict_damage(self)
+    def attack(self, attack):
+
 
     #Make sure that the defense is the enemy player defense. Health is the enemy Health. 
     #this is activated when the player attacks (Right clicks) while colliding with the other player
@@ -63,6 +64,7 @@ Player2Image = pygame.image.load("img/Player2Image.png")
 #Loads the players in their starting positions and with their stats
 Player1 = Player(Player1Image, 300, 310, 6, 6, 6)
 Player2 = Player(Player2Image, 700, 310, 6, 6, 6)
+players = [Player1, Player2]
 
 
 #Images for base 1 and 2
@@ -181,7 +183,8 @@ while True:
                     print(f"Health = {dice_values[2]}")
                     print("________")
                     dice_list[i].is_active = False
-        #keydown and stuff if event.type == 
+       
+    #keydown and stuff if event.type == 
 
 
     #Draw the background, and bases in certain positions
@@ -201,7 +204,7 @@ while True:
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
         print ("Players are colliding")
-
+            if 
 
          # damage to other player
 
