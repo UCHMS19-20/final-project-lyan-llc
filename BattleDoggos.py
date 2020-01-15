@@ -14,12 +14,23 @@ screen = pygame.display.set_mode( (1300, 560) )
 white = pygame.Color(255, 255, 255)
 black = pygame.Color(0, 0, 0)
 
-#Load the image of the battlefield
+# LOAD ALL IMAGES
+# background images and create rects
 background = pygame.image.load("img/BDField.png")
 backgroundrect = background.get_rect()
+abilities_BG = pygame.image.load("img/AbilitiesBG2.png")
+abilities_BGrect = background.get_rect()
+# player images
+Player1Image = pygame.image.load("img/Player1Image.png")
+Player2Image = pygame.image.load("img/Player2Image.png")
+# images for bases
+Base1Image = pygame.image.load("img/Base1.png")
+Base2Image = pygame.image.load("img/Base2.png")
+# button images
+dice = pygame.image.load("img/red_dice.gif")
+start_battle_button = pygame.image.load(img/startbattle.jpg
 
-
-#Creates a class for the two bases
+# Create classes Base, Player, and Button
 class Base:
     def __init__(self, image, x, y): 
         self.health = 1000
@@ -54,45 +65,7 @@ class Player:
         damage = attack - defense
         health - damage
         """
-        
-#Images for Player 1 and 2
 
-Player1Image = pygame.image.load("img/Player1Image.png")
-Player2Image = pygame.image.load("img/Player2Image.png")
-
-
-#Loads the players in their starting positions and with their stats
-Player1 = Player(Player1Image, 300, 310, 6, 6, 6)
-Player2 = Player(Player2Image, 700, 310, 6, 6, 6)
-players = [Player1, Player2]
-
-
-#Images for base 1 and 2
-Base1Image = pygame.image.load("img/Base1.png")
-
-Base2Image = pygame.image.load("img/Base2.png")
-
-
-#Creates the base objects with custom location and images (Still need to put in location)
-Base1 = Base(Base1Image, 2, 170)
-Base2 = Base(Base2Image, 1100, 170)
-
-
-
-# Create font objects
-big_font = pygame.font.SysFont("Comicsansms", 75)
-medium_font = pygame.font.SysFont("Comicsansms", 50)
-little_font = pygame.font.SysFont("Comicsansms", 25)
- 
-# Create text objects
-player1_text = big_font.render("PLAYER 1", True, white)
-click_text = little_font.render("Click the dice to get your stats!", True, white)
-
-# load images
-dice = pygame.image.load("img/red_dice.gif")
-abilities_BG = pygame.image.load("img/AbilitiesBG2.png")
-
-# Create button class
 class Button:
     def __init__(self, img, x, y):
         '''Button is defined by rect and image, as well as if it is active'''
@@ -111,6 +84,32 @@ class Button:
     def roll_die(self):
         '''Return random integer between 0 and 6'''
         return random.randint(1,6)
+      
+
+#Loads the players in their starting positions and with their stats
+Player1 = Player(Player1Image, 300, 310, 6, 6, 6)
+Player2 = Player(Player2Image, 700, 310, 6, 6, 6)
+players = [Player1, Player2]
+
+
+
+
+#Creates the base objects with custom location and images (Still need to put in location)
+Base1 = Base(Base1Image, 2, 170)
+Base2 = Base(Base2Image, 1100, 170)
+
+
+
+# Create font objects
+big_font = pygame.font.SysFont("Comicsansms", 75)
+medium_font = pygame.font.SysFont("Comicsansms", 50)
+little_font = pygame.font.SysFont("Comicsansms", 25)
+ 
+# Create text objects
+player1_text = big_font.render("PLAYER 1", True, white)
+click_text = little_font.render("Click the dice to get your stats!", True, white)
+
+
 
 # create list of 3 buttons that look like the red dice
 dice_list = []
@@ -154,7 +153,10 @@ while True:
     # draw all three dice in the dice_list
     for d in dice_list:
             screen.blit(d.img, d.rect)
-   
+    
+    # create the "Start Battle" button
+    start_battle = Button()
+
     # get position of mouse
     mouse_pos = pygame.mouse.get_pos()
     
@@ -164,7 +166,6 @@ while True:
         
         # Check to see if the current event is a QUIT event
         if event.type == pygame.QUIT:
-
             # If so, exit the program
             sys.exit()
       
@@ -184,6 +185,10 @@ while True:
                     print("________")
                     dice_list[i].is_active = False
        
+            if start_battle.has_mouse():
+                pygame.time.wait(1000)
+                break
+
     #keydown and stuff if event.type == 
 
 
