@@ -89,7 +89,7 @@ player1_text = big_font.render("PLAYER 1", True, white)
 click_text = little_font.render("Click the dice to get your stats!", True, white)
 
 # load images
-dice = pygame.image.load("img/red_dice.gif")
+dice = pygame.image.load("img/Base1.png")
 abilities_BG = pygame.image.load("img/AbilitiesBG2.png")
 
 # Create button class
@@ -170,6 +170,7 @@ while True:
             # If so, exit the program
             sys.exit()
         # check if mouse is pressing down on a button
+        
         if event.type == pygame.MOUSEBUTTONDOWN:
             for i in range(0, len(dice_list)):
                 if dice_list[i-2].has_mouse() and dice_list[i].is_active:
@@ -211,7 +212,7 @@ while True:
     screen.blit(Base2Image, Base2.rect)
     screen.blit(Player1Image, Player1.rect)
     screen.blit(Player2Image, Player2.rect)
-    pygame.display.flip()
+
 
     #Player collision Code
 
@@ -228,8 +229,14 @@ while True:
 
 
     #Health Bar Player1
-    pygame.draw.rect(win, (255, 0, 0), (200, 60), 50, 10)
-    pygame.draw.rect(win, (0, 255, 0), (200, 60), 50, 10)
+    #draws on the window, color, (x, y), width, height
+
+    pygame.draw.rect(win, (255, 0, 0), (200, 60), 120, 10)
+    pygame.draw.rect(win, (0, 255, 0), (200, 60), Player1.health*20, 10)
+
+    pygame.display.flip()
+
+
  
 
 
