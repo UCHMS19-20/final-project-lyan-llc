@@ -41,16 +41,19 @@ class Player:
         self.attack = attack
         self.defence = defense
         self.health = health
-
+        #for later in the game when the player has no health, the character disappears and is deleted
+        self.visible = True
 
     #Make sure that the defense is the enemy player defense. Health is the enemy Health. 
     #this is activated when the player attacks (Right clicks) while colliding with the other player
     #still need to put the player collision code it
     """
-    def damage(health, defense, attack):
+    def damage(self, health, defense, attack):
         #If colliding and left click is pressed:
-        damage = attack - defense
-        health - damage
+        if self.health > 0:
+            damage = attack - defense
+            health =- damage
+        else: self.visible = False
         """
         
 #Images for Player 1 and 2
@@ -122,6 +125,8 @@ dice_rolling = False
 
 # Main loop. Your game would go inside this loop
 while True:
+    keys = pygame.key.get_pressed()
+    
     # do something for each event in the event queue (list of things that happen)
     # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
     if dice_rolling == True:
@@ -175,8 +180,30 @@ while True:
                     print(f"Health = {dice_values[2]}")
                     print("________")
                     dice_list[i].is_active = False
-        #keydown and stuff if event.type == 
+        #Determines the velocity for player 1
+        if keys[pygame.K_LEFT]:
+            velocity1 = -50
+        else: 
+            velocity1 = 0
+        if keys[pygame.K_RIGHT]:
+            velocity1 = 50
+        else: 
+            velocity1 = 0
 
+        #Determines the velocity for player 2
+        if keys[pygame.K_a]:
+            velocity2 = -50
+        else: 
+            velocity2 = 0
+        if keys[pygame.K_d]:
+            velocity2 = 50
+        else: 
+            velocity2 = 0
+        
+    #Changes the players position according to the respective velocity
+    Player1.rect.x += velocity1
+    Player2.rect.x += velocity2
+    
 
     #Draw the background, and bases in certain positions
     screen.blit(background, backgroundrect)
@@ -185,12 +212,6 @@ while True:
     screen.blit(Player1Image, Player1.rect)
     screen.blit(Player2Image, Player2.rect)
     pygame.display.flip()
-
-
-    #Movement
-
-
-
 
     #Player collision Code
 
@@ -201,6 +222,18 @@ while True:
 
 
     #Heal?
+
+
+    #Health Bars
+
+
+    #Health Bar Player1
+    pygame.draw.rect(win, (255, 0, 0), (200, 60), 50, 10)
+    pygame.draw.rect(win, (0, 255, 0), (200, 60), 50, 10)
+ 
+
+
+
 
 
 
