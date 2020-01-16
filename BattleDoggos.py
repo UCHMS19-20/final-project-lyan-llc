@@ -14,6 +14,11 @@ screen = pygame.display.set_mode( (1300, 560) )
 white = pygame.Color(255, 255, 255)
 black = pygame.Color(0, 0, 0)
 
+# Create font objects
+big_font = pygame.font.SysFont("Comicsansms", 75)
+medium_font = pygame.font.SysFont("Comicsansms", 50)
+little_font = pygame.font.SysFont("Comicsansms", 25)
+
 # LOAD ALL IMAGES
 # background images and create rects
 background = pygame.image.load("img/BDField.png")
@@ -32,7 +37,8 @@ start_battle_button = pygame.image.load(img/startbattle.jpg
 
 # Create classes Base, Player, and Button
 class Base:
-    def __init__(self, image, x, y): 
+    def __init__(self, image, x, y):
+        '''Base is defined by its image and coordinates'''
         self.health = 1000
         self.image = image
         self.rect = self.image.get_rect()
@@ -45,6 +51,7 @@ class Base:
 
 class Player:
     def __init__(self, image, x, y, attack, defense, health):
+        '''Player is defined by its image, coordinates, and abilities'''
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -53,7 +60,7 @@ class Player:
         self.defense = defense
         self.health = health
 
-    def attack(self, attack):
+    # def attack(self, attack):
 
 
     #Make sure that the defense is the enemy player defense. Health is the enemy Health. 
@@ -85,46 +92,35 @@ class Button:
         '''Return random integer between 0 and 6'''
         return random.randint(1,6)
       
-
-#Loads the players in their starting positions and with their stats
-Player1 = Player(Player1Image, 300, 310, 6, 6, 6)
-Player2 = Player(Player2Image, 700, 310, 6, 6, 6)
-players = [Player1, Player2]
-
-
-
-
-#Creates the base objects with custom location and images (Still need to put in location)
+# Create 2 bases using Base class
 Base1 = Base(Base1Image, 2, 170)
 Base2 = Base(Base2Image, 1100, 170)
 
+# Create 2 players using Player class
+Player1 = Player(Player1Image, 300, 310, 6, 6, 6)
+Player2 = Player(Player2Image, 700, 310, 6, 6, 6)
+# create a list of players
+players = [Player1, Player2]
 
-
-# Create font objects
-big_font = pygame.font.SysFont("Comicsansms", 75)
-medium_font = pygame.font.SysFont("Comicsansms", 50)
-little_font = pygame.font.SysFont("Comicsansms", 25)
- 
-# Create text objects
-player1_text = big_font.render("PLAYER 1", True, white)
-click_text = little_font.render("Click the dice to get your stats!", True, white)
-
-
-
-# create list of 3 buttons that look like the red dice
+# Create list of 3 buttons that look like the red dice (using Button class)
 dice_list = []
 for y in range(3):
     dice_list.append(Button(dice, 525, y * 200 + 160))
 
-# create blank list of 3 aspects of the dice (later to be abilities)
+# Create blank list of 3 aspects of the dice (later to be abilities)
 dice_values = [0,0,0]
 
 # set initial value of if the dice is being rolled to False
 dice_rolling = False
 
-# main loop for the abilities screen
+# TITLE SCREEN
+'''press enter to break and move to next screen'''
+
+# RULES SCREEN
+'''press enter to break and move to next screen'''
+
+# ABILITIES SCREEN
 while True:
-    # do something for each event in the event queue (list of things that happen)
     # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
     if dice_rolling == True:
         screen.blit((medium_font.render(f"Dice rolling...", True, white)), (40, 200))
@@ -136,8 +132,8 @@ while True:
     # display colors, images and text
     screen.fill((0,0,0))
     screen.blit(abilities_BG, (0,0))
-    screen.blit(player1_text, (800, 0))
-    screen.blit(click_text, (800, 100))
+    screen.blit(big_font.render("PLAYER 1", True, white), (800, 0))
+    screen.blit(little_font.render("Click the dice to get your stats!", True, white), (800, 100))
     
     # set the abilities to the values in the dice_values list
     attack, defense, health = dice_values
@@ -162,8 +158,6 @@ while True:
     
    
     for event in pygame.event.get():
-    
-        
         # Check to see if the current event is a QUIT event
         if event.type == pygame.QUIT:
             # If so, exit the program
@@ -189,8 +183,8 @@ while True:
                 pygame.time.wait(1000)
                 break
 
-    #keydown and stuff if event.type == 
-
+# BATTLE SCREEN
+While True:
 
     #Draw the background, and bases in certain positions
     screen.blit(background, backgroundrect)
@@ -200,11 +194,7 @@ while True:
     screen.blit(Player2Image, Player2.rect)
     pygame.display.flip()
 
-
     #Movement
-
-
-
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
@@ -213,24 +203,6 @@ while True:
 
          # damage to other player
 
-
-
     #Heal?
 
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
+# END-OF-GAME SCREEN
