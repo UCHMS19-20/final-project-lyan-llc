@@ -23,7 +23,7 @@ little_font = pygame.font.SysFont("Comicsansms", 25)
 # LOAD ALL IMAGES
 # background images and create rects
 battle_BG = pygame.image.load("img/BDField.png")
-backgroundrect = background.get_rect()
+backgroundrect = battle_BG.get_rect()
 cloud_BG = pygame.image.load("img/AbilitiesBG2.png")
 
 # player images
@@ -35,7 +35,7 @@ Player2Image = pygame.image.load("img/Player2Image.png")
 # Base2Image = pygame.image.load("img/Base2.png")
 # button images
 dice = pygame.image.load("img/red_dice.gif")
-start_battle_button = pygame.image.load(img/startbattle.jpg
+start_battle_button = pygame.image.load(img/startbattle.jpg)
 
 # Create classes Player and Button
 
@@ -126,7 +126,7 @@ keys = pygame.key.get_pressed()
 
 # TITLE SCREEN
 '''press enter to break and move to next screen'''
-While True:
+while True:
     # display cloud background
     background(cloud_BG)
    
@@ -143,8 +143,8 @@ While True:
     pygame.display.flip()
 
 # RULES SCREEN
-While True:
-'''press enter to break and move to next screen'''
+while True:
+    '''press enter to break and move to next screen'''
     # display cloud background
     background(cloud_BG)
     
@@ -164,7 +164,7 @@ for p in players:
     # Create list of 3 buttons that look like the red dice (using Button class)
     dice_list = []
     for y in range(3):
-    dice_list.append(Button(dice, 525, y * 200 + 160))
+        dice_list.append(Button(dice, 525, y * 200 + 160))
 
     # Create blank list of 3 aspects of the dice (later to be abilities)
     dice_values = [0,0,0]
@@ -228,7 +228,7 @@ for p in players:
         
         # if any die is still active, the parentheses return True, which is negated and if statement will not run
         # if all dice have been clicked, the parenthese return False, which is negated and if statement runs
-        if !(dice_list[0].is_active || dice_list[1].is_active || dice_list[2].is_active):
+        if (dice_list[0].is_active or dice_list[1].is_active or dice_list[2].is_active) == False:
             # draw the "Start Battle!" buttton
             screen.blit(start_battle.img, start_battle.rect)
         
@@ -236,7 +236,7 @@ for p in players:
         pygame.display.flip()
 
 # BATTLE SCREEN
-While True:
+while True:
     # Display battle background
     background(battle_BG)
     # # Draw the bases in certain positions
@@ -252,7 +252,7 @@ While True:
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
         print ("Players are colliding")
-            if 
+        
 
          # damage to other player
 
