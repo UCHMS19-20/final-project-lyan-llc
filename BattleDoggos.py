@@ -34,8 +34,8 @@ Player2Image = pygame.image.load("img/Player2Image.png")
 # Base1Image = pygame.image.load("img/Base1.png")
 # Base2Image = pygame.image.load("img/Base2.png")
 # button images
-dice = pygame.image.load("img/red_dice.gif")
-start_battle_button = pygame.image.load(img/startbattle.jpg)
+dice = pygame.image.load("img/dice.jpg")
+start_battle_button = pygame.image.load("img/startbattle.png")
 
 # Create classes Player and Button
 
