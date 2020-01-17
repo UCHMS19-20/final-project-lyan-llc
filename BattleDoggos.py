@@ -210,9 +210,7 @@ while True:
     screen.blit(background, backgroundrect)
     screen.blit(Base1Image, Base1.rect)
     screen.blit(Base2Image, Base2.rect)
-    screen.blit(Player1Image, Player1.rect)
-    screen.blit(Player2Image, Player2.rect)
-
+    
 
     #Player collision Code
 
@@ -230,10 +228,13 @@ while True:
 
     #Health Bar Player1
     #draws on the window, color, (x, y), width, height
+    pygame.draw.rect(screen, (255, 0, 0), (200, 60), 120, 10)
+    pygame.draw.rect(screen, (0, 255, 0), (200, 60), Player1.health*20, 10)
 
-    pygame.draw.rect(win, (255, 0, 0), (200, 60), 120, 10)
-    pygame.draw.rect(win, (0, 255, 0), (200, 60), Player1.health*20, 10)
-
+    #Player 2 Health Bar
+    pygame.draw.rect(screen, (255, 0, 0), (1000, 60), 120, 10)
+    pygame.draw.rect(screen, (0, 255, 0), (1000, 60), Player2.health*20, 10)
+    
     pygame.display.flip()
 
 
