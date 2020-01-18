@@ -38,20 +38,6 @@ dice = pygame.image.load("img/dice.jpg")
 start_battle_button = pygame.image.load("img/startbattle.png")
 
 # Create classes Player and Button
-
-# class Base:
-#     def __init__(self, image, x, y):
-#         '''Base is defined by its image and coordinates'''
-#         self.health = 1000
-#         self.image = image
-#         self.rect = self.image.get_rect()
-#         self.rect.x = x
-#         self.rect.y = y
-# """
-#     def Damage(damage):
-
-# """
-
 class Player:
     def __init__(self, name, image, x, y, attack, defense, health):
         '''Player is defined by its image, coordinates, and abilities'''
@@ -63,19 +49,6 @@ class Player:
         self.attack = attack
         self.defense = defense
         self.health = health
-
-    # def attack(self, attack):
-
-
-    #Make sure that the defense is the enemy player defense. Health is the enemy Health. 
-    #this is activated when the player attacks (Right clicks) while colliding with the other player
-    #still need to put the player collision code it
-    """
-    def damage(health, defense, attack):
-        #If colliding and left click is pressed:
-        damage = attack - defense
-        health - damage
-        """
 
 class Button:
     def __init__(self, img, x, y):
@@ -95,10 +68,6 @@ class Button:
     def roll_die(self):
         '''Return random integer between 0 and 6'''
         return random.randint(1,6)
-      
-# # Create 2 bases using Base class
-# Base1 = Base(Base1Image, 2, 170)
-# Base2 = Base(Base2Image, 1100, 170)
 
 # Create 2 players using Player class
 Player1 = Player("Player 1", Player1Image, 300, 310, 0, 0, 0)
@@ -150,7 +119,7 @@ while True:
     
     # display rules
     text("Rules", medium_font, white, 100, 180)
-    text("Rules rules rules rules rules rules rules rules rules", medium_font, white, 100, 380)
+    text("Rules rules rules rules rules rules rules rules rules", medium_font, white, 100, 280)
     
     # if return is pressed, break loop
     if keys[pygame.K_RETURN]:
@@ -194,7 +163,7 @@ for p in players:
             screen.blit(d.img, d.rect)
 
         # create the "Start Battle" button
-        start_battle = Button()
+        start_battle = Button(pygame.image.load("img/BDField.png"), 100, 100)
 
         # get position of mouse
         mouse_pos = pygame.mouse.get_pos()
