@@ -22,19 +22,15 @@ little_font = pygame.font.SysFont("Comicsansms", 25)
 
 # LOAD ALL IMAGES
 # background images and create rects
-battle_BG = pygame.image.load("img/BDField.png")
-backgroundrect = battle_BG.get_rect()
+battle_BG = pygame.image.load("img/BDField3.jpg")
 cloud_BG = pygame.image.load("img/AbilitiesBG2.png")
 
 # player images
 Player1Image = pygame.image.load("img/Player1Image.png")
 Player2Image = pygame.image.load("img/Player2Image.png")
 
-# # images for bases
-# Base1Image = pygame.image.load("img/Base1.png")
-# Base2Image = pygame.image.load("img/Base2.png")
 # button images
-dice = pygame.image.load("img/dice.jpg")
+dice = pygame.image.load("img/dice2.png")
 start_battle_button = pygame.image.load("img/startbattle.png")
 
 # Create classes Player and Button
@@ -75,7 +71,6 @@ Player2 = Player("Player 2", Player2Image, 700, 310, 0, 0, 0)
 # create a list of players
 players = [Player1, Player2]
 
-
 # set initial value of if the dice is being rolled to False
 dice_rolling = False
 
@@ -85,75 +80,116 @@ def background(image):
     screen.blit(image, (0,0))
     return
 
-def text(text, size, color, x, y):
-    ''' Function displays text on the screen with the specified attributes'''
-    screen.blit(size.render(text, True, color), (x, y))
+def text(text, size, x, y):
+    ''' Function displays text on the screen with the specified attributes, with a black shadow'''
+    for n in color_list:
+        screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
     return
 
-# set variable equation to get_pressed function, to get state of keys
-keys = pygame.key.get_pressed()
+# for n in color_list:
+#             text(f"Attack: {p.attack}", little_font, n, 598+2*color_list.index(n), 180)
+#             text(f"Defense: {p.defense}", little_font, n, 598+2*color_list.index(n), 280)
+#             text(f"Health: {p.health}", little_font, n, 598+2*color_list.index(n), 380)
+
+# set the continuation of the scene to True
+scene_cont = True
+
 
 # TITLE SCREEN
-'''press enter to break and move to next screen'''
-while True:
+while scene_cont == True:
     # display cloud background
     background(cloud_BG)
-   
+
+    # get state of all the keys, every frame
+    keys = pygame.key.get_pressed()
+
+    for event in pygame.event.get():
+        # Check to see if the current event is a QUIT event
+        if event.type == pygame.QUIT:
+            # If so, exit the program
+            sys.exit()
+        # if return is pressed, break loop
+        if keys[pygame.K_RETURN]:
+                scene_cont = False
+
     # display title screen text
-    text("Welcome to...", medium_font, white, 100, 180)
-    text("BATTLE DOGGOS", big_font, white, 100, 380)
-    text("Press enter to continue.", little_font, white, 100, 580)
+    text("Welcome to...", medium_font, 100, 100)
+    text("BATTLE DOGGOS", big_font, 100, 180)
+    text("Press enter to continue.", little_font, 100, 280)
     
-    # if return is pressed, break loop
-    if keys[pygame.K_RETURN]:
-        break
     
     # "flip" screen for this frame and then While True loop repeats
     pygame.display.flip()
 
+# wait 1 second so it doesn't register the click for the next scene accidentally
+pygame.time.wait(1000)
+
+#set scene_cont back to True so the next scene will run
+scene_cont = True
+
 # RULES SCREEN
-while True:
-    '''press enter to break and move to next screen'''
+while scene_cont == True:
     # display cloud background
     background(cloud_BG)
+
+    # get state of all the keys, every frame
+    keys = pygame.key.get_pressed()
+    
+    for event in pygame.event.get():
+        # Check to see if the current event is a QUIT event
+        if event.type == pygame.QUIT:
+            # If so, exit the program
+            sys.exit()
+         # if return is pressed, break loop
+        if keys[pygame.K_RETURN]:
+            scene_cont = False
     
     # display rules
-    text("Rules", medium_font, white, 100, 180)
-    text("Rules rules rules rules rules rules rules rules rules", medium_font, white, 100, 280)
-    
-    # if return is pressed, break loop
-    if keys[pygame.K_RETURN]:
-        break
+    text("Rules", medium_font, 100, 180)
+    text("Rules rules rules rules rules rules rules rules rules", medium_font, 100, 280)
     
     # "flip" screen for this frame and then While True loop repeats
     pygame.display.flip()
+
+# wait 1 second so it doesn't register the click for the next scene accidentally
+pygame.time.wait(1000)
+
+# set value of scene_cont back to True to make the next screen
+scene_cont = True
 
 # ABILITIES SCREEN
 for p in players:
+    # # set value of scene_cont back to True to make the next screen
+    # scene_cont = True
+    # # wait 1 second so it doesn't register the click for the next scene accidentally
+    # pygame.time.wait(1000)
+
     # Create list of 3 buttons that look like the red dice (using Button class)
     dice_list = []
     for y in range(3):
-        dice_list.append(Button(dice, 525, y * 200 + 160))
+        dice_list.append(Button(dice, 525, y * 100 + 160))
 
+    for event in pygame.event.get():
+                # Check to see if the current event is a QUIT event
+                if event.type == pygame.QUIT:
+                    # If so, exit the program
+                    sys.exit()
+    
     # Create blank list of 3 aspects of the dice (later to be abilities)
     dice_values = [0,0,0]
     
-    while True:
-        # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
-        if dice_rolling == True:
-            screen.blit((medium_font.render(f"Dice rolling...", True, white)), (40, 200))
-            pygame.display.flip()
-            pygame.time.wait(3000)
-            # set back to False so the program doesn't pause again until another die is rolled
-            dice_rolling = False 
-
+    # start scene loop (breaks when scene ends)
+    while scene_cont == True:
+        background(cloud_BG)
+        # get state of all the keys, every frame
+        keys = pygame.key.get_pressed()
+    
+        
         # display text
-        text(f"{p.name}", little_font, white, 800, 0)
-        # display the same words twice in white and black, offset to create a shadow effect
-        for n in len(color_list):
-            text(f"Attack: {p.attack}", little_font, color_list[n], 598+2*n, 180)
-            text(f"Defense: {p.defense}", little_font, color_list[n], 598+2*n, 380)
-            text(f"Health: {p.health}", little_font, color_list[n], 598+2*n, 580)
+        text(f"{p.name}", big_font, 400, 50)
+        text(f"Attack: {p.attack}", little_font, 598, 180)
+        text(f"Defense: {p.defense}", little_font, 598, 280)
+        text(f"Health: {p.health}", little_font, 598, 380)
 
         # set the abilities to the values in the dice_values list
         p.attack, p.defense, p.health = dice_values
@@ -190,28 +226,48 @@ for p in players:
                         print("________")
                         # Deactivate the button
                         dice_list[i].is_active = False
+
+        # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
+        if dice_rolling == True:
+            text("Dice rolling...", medium_font, 700, 100)
+            pygame.display.flip()
+            pygame.time.wait(2000)
+            # set back to False so the program doesn't pause again until another die is rolled
+            dice_rolling = False 
+
                 # check if the mouse is on the start button (while it presses down)
-                if start_battle.has_mouse():
-                    pygame.time.wait(1000)
-                    break
-        
-        # if any die is still active, the parentheses return True, which is negated and if statement will not run
-        # if all dice have been clicked, the parenthese return False, which is negated and if statement runs
-        if (dice_list[0].is_active or dice_list[1].is_active or dice_list[2].is_active) == False:
-            # draw the "Start Battle!" buttton
-            screen.blit(start_battle.img, start_battle.rect)
-        
+                # if start_battle.has_mouse():
+                #     pygame.time.wait(1000)
+                #     scene_cont = False
+        if p == Player1:
+            if (dice_list[0].is_active or dice_list[1].is_active or dice_list[2].is_active) == False:
+                scene_cont = False
+        # only runs code for "Start Battle" button if the sceen is for Player 2
+        if p == Player2:
+            # if any die is still active, the parentheses return True, which is negated and if statement will not run
+             # if all dice have been clicked, the parenthese return False, which is negated and if statement runs
+            if (dice_list[0].is_active or dice_list[1].is_active or dice_list[2].is_active) == False:
+                # draw the "Start Battle!" buttton
+                screen.blit(start_battle.img, start_battle.rect)
+
+    
         # "flip" screen for this frame and then While True loop repeats
         pygame.display.flip()
+
+    scene_cont = True
+    pygame.time.wait(1000)
 
 # BATTLE SCREEN
 while True:
     # Display battle background
     background(battle_BG)
-    # # Draw the bases in certain positions
-    # '''screen.blit(Base1Image, Base1.rect)
-    # screen.blit(Base2Image, Base2.rect)'''
 
+    for event in pygame.event.get():
+        # Check to see if the current event is a QUIT event
+        if event.type == pygame.QUIT:
+            # If so, exit the program
+            sys.exit()
+    
     screen.blit(Player1Image, Player1.rect)
     screen.blit(Player2Image, Player2.rect)
     pygame.display.flip()
