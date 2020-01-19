@@ -90,7 +90,7 @@ click_text = little_font.render("Click the dice to get your stats!", True, white
 
 # load images
 dice = pygame.image.load("img/Base1.png")
-abilities_BG = pygame.image.load("img/AbilitiesBG2.png")
+abilities_BG = pygame.image.load("img/Base1.png")
 
 # Create button class
 class Button:
@@ -228,12 +228,18 @@ while True:
 
     #Health Bar Player1
     #draws on the window, color, (x, y), width, height
-    pygame.draw.rect(screen, (255, 0, 0), (200, 60), 120, 10)
-    pygame.draw.rect(screen, (0, 255, 0), (200, 60), Player1.health*20, 10)
+
+    #Possible Problem: When damaged, Player 2's health bar decreases the wrong way(right to left instead of left to right)
+    #Possible solution: Multiply the Player2 Health by -60, and create a different damage function in the player class where when player 2 is damaged, 
+    #health is added to decrease the bar
+    
+    pygame.draw.rect(screen, (0, 0, 0), (10, 30, Player1.health*90, 10))
+    pygame.draw.rect(screen, (0, 255, 0), (10, 30, Player1.health*90, 15))         
+ 
 
     #Player 2 Health Bar
-    pygame.draw.rect(screen, (255, 0, 0), (1000, 60), 120, 10)
-    pygame.draw.rect(screen, (0, 255, 0), (1000, 60), Player2.health*20, 10)
+    pygame.draw.rect(screen, (0, 0, 0), (750, 30, Player2.health*90, 10))
+    pygame.draw.rect(screen, (0, 255, 0), (750, 30, Player2.health*90, 15))
     
     pygame.display.flip()
 
