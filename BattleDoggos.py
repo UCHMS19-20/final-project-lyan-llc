@@ -26,8 +26,8 @@ battle_BG = pygame.image.load("img/BDField3.jpg")
 cloud_BG = pygame.image.load("img/AbilitiesBG2.png")
 
 # player images
-Player1Image = pygame.image.load("img/Player1Image.png")
-Player2Image = pygame.image.load("img/Player2Image.png")
+Player1Image = pygame.image.load("img/Base1.png")
+Player2Image = pygame.image.load("img/Base2.png")
 
 # button images
 dice = pygame.image.load("img/dice2.png")
@@ -242,6 +242,9 @@ for p in players:
     pygame.time.wait(1000)
     scene_cont = True
 
+Player1MaxHealth = Player1.health
+Player2MaxHealth = Player2.health
+
 # BATTLE SCREEN
 while scene_cont == True:
     # Display battle background
@@ -262,13 +265,11 @@ while scene_cont == True:
     #Movement
     #Determines the velocity for player 1
 
-
+ 
     #Have to put in the borders so that if the player tries to escape the screen they are bounced back
     if keys[pygame.K_LEFT]:
         velocity1 = -10
-    else: 
-        velocity1 = 0
-    if keys[pygame.K_RIGHT]:
+    elif keys[pygame.K_RIGHT]:
         velocity1 = 10
     else: 
         velocity1 = 0
@@ -276,9 +277,7 @@ while scene_cont == True:
     #Determines the velocity for player 2
     if keys[pygame.K_a]:
         velocity2 = -10
-    else: 
-         velocity2 = 0
-    if keys[pygame.K_d]:
+    elif keys[pygame.K_d]:
          velocity2 = 10
     else: 
         velocity2 = 0
@@ -286,36 +285,26 @@ while scene_cont == True:
     #Changes the players position according to the respective velocity
     Player1.rect.x += velocity1
     Player2.rect.x += velocity2
+
+
+    #Health Bars
+    pygame.draw.rect(screen, (0, 0, 0), (10, 475, Player1MaxHealth*90, 10))
+    pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*90, 15))     
+
+    #Player 2 Health Bar
+    pygame.draw.rect(screen, (0, 0, 0), (10, 525, Player2MaxHealth*90, 10))
+    pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*90, 15))
+
+
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
         print ("Players are colliding")
         
 
          # damage to other player
-
-    #Health Bars
-
-
-    #Health Bar Player1
-    #draws on the window, color, (x, y), width, height
-
-    #Possible Problem: When damaged, Player 2's health bar decreases the wrong way(right to left instead of left to right)
-    #Possible solution: Multiply the Player2 Health by -60, and create a different damage function in the player class where when player 2 is damaged, 
-    #health is actually added to decrease the bar
-    #Also, the width of the green bar changes according to how much the player health changes. However, this applies to the black bar two. How do I keep the black bar constant?
-
-    pygame.draw.rect(screen, (0, 0, 0), (10, 30, Player1.health*90, 10))
-    pygame.draw.rect(screen, (0, 255, 0), (10, 30, Player1.health*90, 15))         
- 
-
-    #Player 2 Health Bar
-    pygame.draw.rect(screen, (0, 0, 0), (750, 30, Player2.health*90, 10))
-    pygame.draw.rect(screen, (0, 255, 0), (750, 30, Player2.health*90, 15))
-
     pygame.display.flip()
-    
-    #Heal?
 
+    
 # END-OF-GAME SCREEN
 
 
