@@ -200,6 +200,7 @@ while True:
         else: 
             velocity2 = 0
         if keys[pygame.K_d]:
+            velocity2 = 10
         else: 
             velocity2 = 0
         
