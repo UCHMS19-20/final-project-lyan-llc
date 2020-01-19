@@ -182,22 +182,24 @@ while True:
                     print("________")
                     dice_list[i].is_active = False
         #Determines the velocity for player 1
+
+
+        #Have to put in the borders so that if the player tries to escape the screen they are bounced back
         if keys[pygame.K_LEFT]:
-            velocity1 = -50
+            velocity1 = -10
         else: 
             velocity1 = 0
         if keys[pygame.K_RIGHT]:
-            velocity1 = 50
+            velocity1 = 10
         else: 
             velocity1 = 0
 
         #Determines the velocity for player 2
         if keys[pygame.K_a]:
-            velocity2 = -50
+            velocity2 = -10
         else: 
             velocity2 = 0
         if keys[pygame.K_d]:
-            velocity2 = 50
         else: 
             velocity2 = 0
         
