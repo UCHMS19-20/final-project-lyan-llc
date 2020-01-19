@@ -298,7 +298,7 @@ while scene_cont == True:
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
-        print ("Players are colliding")
+       
         
 
          # damage to other player
