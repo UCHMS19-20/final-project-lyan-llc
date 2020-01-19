@@ -26,8 +26,8 @@ battle_BG = pygame.image.load("img/BDField3.jpg")
 cloud_BG = pygame.image.load("img/AbilitiesBG2.png")
 
 # player images
-Player1Image = pygame.image.load("img/Player1Image.png")
-Player2Image = pygame.image.load("img/Player2Image.png")
+Player1Image = pygame.image.load("img/Remi.png")
+Player2Image = pygame.image.load("img/Heidi.png")
 
 # button images
 dice = pygame.image.load("img/dice2.png")
@@ -45,7 +45,6 @@ class Player:
         self.attack = attack
         self.defense = defense
         self.health = health
-
 class Button:
     def __init__(self, img, x, y):
         '''Button is defined by rect and image, as well as if it is active'''
@@ -256,9 +255,34 @@ while scene_cont == True:
     
     screen.blit(Player1Image, Player1.rect)
     screen.blit(Player2Image, Player2.rect)
-    pygame.display.flip()
+    
 
+    keys = pygame.key.get_pressed()
+    
     #Movement
+    #Determines the velocity for player 1
+
+ 
+    #Have to put in the borders so that if the player tries to escape the screen they are bounced back
+    if keys[pygame.K_LEFT]:
+        velocity1 = -10
+    elif keys[pygame.K_RIGHT]:
+        velocity1 = 10
+    else: 
+        velocity1 = 0
+
+    #Determines the velocity for player 2
+    if keys[pygame.K_a]:
+        velocity2 = -10
+    elif keys[pygame.K_d]:
+         velocity2 = 10
+    else: 
+        velocity2 = 0
+        
+    #Changes the players position according to the respective velocity
+    Player1.rect.x += velocity1
+    Player2.rect.x += velocity2
+
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
@@ -267,8 +291,7 @@ while scene_cont == True:
 
          # damage to other player
 
-    #Heal?
-
+    
 # END-OF-GAME SCREEN
 
 
