@@ -234,8 +234,11 @@ while True:
 
     #Possible Problem: When damaged, Player 2's health bar decreases the wrong way(right to left instead of left to right)
     #Possible solution: Multiply the Player2 Health by -60, and create a different damage function in the player class where when player 2 is damaged, 
-    #health is added to decrease the bar
+    #health is actually added to decrease the bar
+    #Also, the width of the green bar changes according to how much the player health changes. However, this applies to the black bar two. How do I keep the black bar constant?
     
+
+
     pygame.draw.rect(screen, (0, 0, 0), (10, 30, Player1.health*90, 10))
     pygame.draw.rect(screen, (0, 255, 0), (10, 30, Player1.health*90, 15))         
  
