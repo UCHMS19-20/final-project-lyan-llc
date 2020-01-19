@@ -26,8 +26,8 @@ battle_BG = pygame.image.load("img/BDField3.jpg")
 cloud_BG = pygame.image.load("img/AbilitiesBG2.png")
 
 # player images
-Player1Image = pygame.image.load("img/Remi.png")
-Player2Image = pygame.image.load("img/Heidi.png")
+Player1Image = pygame.image.load("img/Heidi.png")
+Player2Image = pygame.image.load("img/Remi.png")
 
 # button images
 dice = pygame.image.load("img/dice2.png")
@@ -65,8 +65,8 @@ class Button:
         return random.randint(1,6)
 
 # Create 2 players using Player class
-Player1 = Player("Player 1", Player1Image, 300, 310, 0, 0, 0)
-Player2 = Player("Player 2", Player2Image, 700, 310, 0, 0, 0)
+Player1 = Player("Player 1", Player1Image, 300, 100, 0, 0, 0)
+Player2 = Player("Player 2", Player2Image, 700, 100, 0, 0, 0)
 # create a list of players
 players = [Player1, Player2]
 
@@ -207,11 +207,12 @@ for p in players:
                     if dice_list[i-2].has_mouse() and dice_list[i].is_active:
                         # "roll die" and get a random number
                         dice_values[i-2] = dice_list[i].roll_die()
-                        # set dice_rolling to True so in the next frame, the progrram will pause and display "Dice Rolling..."
+                        # set dice_rolling to True so in the next frame, the program will pause and display "Dice Rolling..."
                         dice_rolling = True
                         # Deactivate the button
                         dice_list[i].is_active = False
                 if start_battle_button.has_mouse():
+                    print("BATTLE START")
                     scene_cont = False
 
         # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
@@ -242,6 +243,13 @@ for p in players:
     pygame.time.wait(1000)
     scene_cont = True
 
+def calculate_damage(attacker, defender):
+    damage = int(attacker.attack * (1- (defender.defense / 10)))
+    return
+
+for p in players:
+    p.health = p.health * 20
+
 # BATTLE SCREEN
 while scene_cont == True:
     # Display battle background
@@ -253,8 +261,8 @@ while scene_cont == True:
             # If so, exit the program
             sys.exit()
     
-    screen.blit(Player1Image, Player1.rect)
-    screen.blit(Player2Image, Player2.rect)
+    screen.blit(Player1.img, Player1.rect)
+    screen.blit(Player2.img, Player2.rect)
     
 
     keys = pygame.key.get_pressed()
@@ -283,14 +291,23 @@ while scene_cont == True:
     Player1.rect.x += velocity1
     Player2.rect.x += velocity2
 
-
+    
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
-        print ("Players are colliding")
-        
-
-         # damage to other player
-
+         # damage to other players
+        if keys[pygame.K_CAPSLOCK]:
+            Player2.health = Player2.health - calculate_damage(Player1, Player2)
+            print("PLAYER 1 ATTACKED")
+        if keys[pygame.K_RETURN]:
+            Player1.health = Player1.health - calculate_damage(Player2, Player1)
+            print("PLAYER 2 ATTACKED")
+    for p in players:
+        if p.health == 0:
+            text("YEET", big_font, 200, 200)
+            pygame.time.wait(3000)
+            scene_cont = False
+    
+    pygame.display.flip()
     
 # END-OF-GAME SCREEN
 
