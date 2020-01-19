@@ -84,7 +84,12 @@ def text(text, size, x, y):
     for n in color_list:
         screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
     return
+"""
+def UserInput(screen, question):
+    Function prompts a question to the user in the form of a text box and saves it as a string
+    current_string = []
 
+"""
 # set the continuation of the scene to True
 scene_cont = True
 
@@ -273,6 +278,14 @@ while scene_cont == True:
         velocity1 = 10
     else: 
         velocity1 = 0
+    
+    if Player1.rect.x > 1200:
+        velocity1 = -10
+    
+    if Player1.rect.x < 0:
+        velocity1 = 10
+
+
 
     #Determines the velocity for player 2
     if keys[pygame.K_a]:
@@ -281,6 +294,12 @@ while scene_cont == True:
          velocity2 = 10
     else: 
         velocity2 = 0
+    
+    if Player2.rect.x > 1200:
+        velocity2 = -10
+    
+    if Player2.rect.x < 0:
+        velocity2 = 10
         
     #Changes the players position according to the respective velocity
     Player1.rect.x += velocity1
@@ -288,21 +307,21 @@ while scene_cont == True:
 
 
     #Health Bars
+    text("Player 1", little_font, 15, 435)
     pygame.draw.rect(screen, (0, 0, 0), (10, 475, Player1MaxHealth*90, 10))
     pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*90, 15))     
 
     #Player 2 Health Bar
+    text("Player 2", little_font, 15, 487)
     pygame.draw.rect(screen, (0, 0, 0), (10, 525, Player2MaxHealth*90, 10))
     pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*90, 15))
 
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
-       
-        
-
-         # damage to other player
+        print("Characters are colliding")
     pygame.display.flip()
+    
 
     
 # END-OF-GAME SCREEN
