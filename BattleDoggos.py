@@ -243,10 +243,13 @@ for p in players:
     pygame.time.wait(1000)
     scene_cont = True
 
-def calculate_damage(attacker, defender):
-    damage = int(attacker.attack * (1- (defender.defense / 10)))
-    return
+def damage(attacker, defender):
+    '''Calculate damage inflicted based on defense and attack stats of each player'''
+    damage = int((attacker.attack + 6) * (1- (defender.defense / 10)))
+    defender.health = defender.health - damage
+    return defender.health
 
+# scale up how many health points there are for the battle screen
 for p in players:
     p.health = p.health * 20
 
@@ -260,30 +263,26 @@ while scene_cont == True:
         if event.type == pygame.QUIT:
             # If so, exit the program
             sys.exit()
-    
+    # Draw botth players 
     screen.blit(Player1.img, Player1.rect)
     screen.blit(Player2.img, Player2.rect)
     
 
     keys = pygame.key.get_pressed()
     
-    #Movement
-    #Determines the velocity for player 1
-
- 
-    #Have to put in the borders so that if the player tries to escape the screen they are bounced back
-    if keys[pygame.K_LEFT]:
+    # Movement controls:
+    # Player 1 movement controls with A and D
+    if keys[pygame.K_a]:
         velocity1 = -10
-    elif keys[pygame.K_RIGHT]:
-        velocity1 = 10
+    elif keys[pygame.K_d]:
+         velocity1 = 10
     else: 
         velocity1 = 0
-
-    #Determines the velocity for player 2
-    if keys[pygame.K_a]:
+    # Player 2 movement controls with arrow keys
+    if keys[pygame.K_LEFT]:
         velocity2 = -10
-    elif keys[pygame.K_d]:
-         velocity2 = 10
+    elif keys[pygame.K_RIGHT]:
+        velocity2 = 10
     else: 
         velocity2 = 0
         
@@ -296,19 +295,23 @@ while scene_cont == True:
     if Player1.rect.colliderect(Player2.rect) == True:
          # damage to other players
         if keys[pygame.K_CAPSLOCK]:
-            Player2.health = Player2.health - calculate_damage(Player1, Player2)
-            print("PLAYER 1 ATTACKED")
+            pygame.time.wait(500)
+            damage(Player1, Player2)
+            print(Player2.health)
         if keys[pygame.K_RETURN]:
-            Player1.health = Player1.health - calculate_damage(Player2, Player1)
-            print("PLAYER 2 ATTACKED")
+            pygame.time.wait(500)
+            damage(Player2, Player1)
+            print(f"P1:{Player1.health}")
     for p in players:
-        if p.health == 0:
-            text("YEET", big_font, 200, 200)
+        if p.health <= 0:
+            text(f"{p.name} wins!", big_font, 100, 100)
+            pygame.display.flip()
             pygame.time.wait(3000)
             scene_cont = False
-    
+
     pygame.display.flip()
     
+
 # END-OF-GAME SCREEN
 
 

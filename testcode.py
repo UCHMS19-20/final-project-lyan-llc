@@ -4,8 +4,8 @@ import pygame
 import random
 import time
 
-# # Initialize pygame so it runs in the background and manages things
-# pygame.init()
+# Initialize pygame so it runs in the background and manages things
+pygame.init()
 
 # # Create a display. Size must be a tuple, which is why it's in parentheses
 # screen = pygame.display.set_mode( (1300, 560) )
@@ -51,20 +51,30 @@ medium_font = pygame.font.SysFont("Comicsansms", 50)
 little_font = pygame.font.SysFont("Comicsansms", 25)
 
 # Create 2 players using Player class
-Player1 = Player("Player 1", Player1Image, 300, 100, 0, 0, 0)
-Player2 = Player("Player 2", Player2Image, 700, 100, 0, 0, 0)
+Player1 = Player("Player 1", Player1Image, 300, 100, 6, 5, 4)
+Player2 = Player("Player 2", Player2Image, 700, 100, 10, 9, 7)
 # create a list of players
 players = [Player1, Player2]
 
 
-def calculate_damage(player):
-    print(player.attack)
-    print(player.defense)
-    print(player.health)
-    return
+def damage(attacker, defender):
+    damage = int(attacker.attack * (1- (defender.defense / 10)))
+    attacker.health = attacker.health - damage
+    return attacker.health
 
-for p in players:
-    print("hello")
+print(Player1.health)
+print(Player2.health)
+print(damage(Player1, Player2))
+print(damage(Player2, Player1))
+print(damage(Player1, Player2))
+print(damage(Player2, Player1))
+print(damage(Player1, Player2))
+print(damage(Player2, Player1))
+print(damage(Player1, Player2))
+print(damage(Player2, Player1))
+
+# print(Player1.health - P1Dam)
+# print(Player2.health - P2Dam)
 
 
 # while scene_cont == True:
