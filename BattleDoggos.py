@@ -85,8 +85,7 @@ def background(image):
 def text(text, size, x, y):
     ''' Function displays text on the screen with the specified attributes, with a black shadow'''
     for n in color_list:
-        screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
-        
+        screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))    
     return
 
 # set the continuation of the scene to True
