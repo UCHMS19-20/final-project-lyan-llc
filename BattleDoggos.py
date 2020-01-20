@@ -3,6 +3,7 @@ import sys
 import pygame
 import random
 import time
+import string
 
 # Initialize pygame so it runs in the background and manages things
 pygame.init()
@@ -84,12 +85,27 @@ def text(text, size, x, y):
     for n in color_list:
         screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
     return
-"""
-def UserInput(screen, question):
-    Function prompts a question to the user in the form of a text box and saves it as a string
-    current_string = []
 
-"""
+def UserInput(screen, question):
+    """Function prompts a question to the user in the form of a text box and returns it as a string"""
+    current_string = []
+    display_box(screen, question + ": " + string.join(current_string,""))
+    while True:
+        InputKey = pygame.key.get_pressed()
+        if InputKey[pygame.K_BACKSPACE]:
+            current_string = current_string[0:-1]
+        elif InputKey[pygame.K_RETURN]:
+            break
+        elif InputKey[pygame.K_ESCAPE]:
+            break
+        elif InputKey[pygame.K_SPACE]:
+            current_string.append("_")
+        elif InputKey <= 255:
+            current_string.append(chr(InputKey))
+        display_box(screen, question + ": " + string.join(current_string, ""))
+
+
+
 # set the continuation of the scene to True
 scene_cont = True
 
