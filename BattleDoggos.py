@@ -80,7 +80,7 @@ def background(image):
     screen.fill((0,0,0))
     screen.blit(image, (0,0))
     return
-
+"""
 def get_key():
     while True:
         event = pygame.event.poll()
@@ -95,7 +95,7 @@ def text(text, size, x, y):
         screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
         
     return
-
+"""
 def display_box(screen, message):
     Creates a box that displays a message for the user to read
     pygame.draw.rect(screen, (0,0,0), ((screen.get_width() / 2) - 100,(screen.get_height() / 2) - 10, 200, 20), 0)
@@ -133,10 +133,6 @@ scene_cont = True
 while scene_cont == True:
     # display cloud background
     background(cloud_BG)
-
-    UserInput(screen, "What is your name?")
-
-
 
     # get state of all the keys, every frame
     keys = pygame.key.get_pressed()
@@ -190,7 +186,7 @@ while scene_cont == True:
         "begins and you attack each other!",
         "",
         "Player 1 moves back and forth using the A and D keys, and attacks with",
-        "the Caps Lock key. Player 2 uses the left and right arrows,",
+        "the Left Shift key. Player 2 uses the left and right arrows,",
         "and attacks with the enter key."
     ] 
     # display text in lines that fit on the screen and are evenly spaced
@@ -339,8 +335,6 @@ for p in players:
     pygame.time.wait(1000)
     scene_cont = True
 
-Player1MaxHealth = Player1.health
-Player2MaxHealth = Player2.health
 
 def damage(attacker, defender):
     '''Calculate damage inflicted based on defense and attack stats of each player'''
@@ -391,46 +385,57 @@ while scene_cont == True:
         velocity1 = 10
 
 
+    #Determines the velocity for player 2 (Based on WASD key movement layout)
 
-    #Determines the velocity for player 2
+    #if the Player 2 presses a, their character velocity is set to 10 in the negative direction (left)
     if keys[pygame.K_a]:
         velocity2 = -10
+    #if the Player 2 presses d, their character velocity is set to 10 in the positive direction (right)
     elif keys[pygame.K_d]:
          velocity2 = 10
+    #otherwise, the velocity is set to 0
     else: 
         velocity2 = 0
     
+
+    #if the player2's x position is the right border of the display, the velocity of the character is set to 10 to the left to prevent the player from moving past the border
     if Player2.rect.x > 1200:
         velocity2 = -10
     
+    #if the player2's x position is the left border of the display, the velocity of the character is set to 10 to the right to prevent the player from moving past the border
     if Player2.rect.x < 0:
         velocity2 = 10
         
-    #Changes the players position according to the respective velocity
+    #Changes the players' x positions according to the respective velocity
     Player1.rect.x += velocity1
     Player2.rect.x += velocity2
 
 
     #Health Bars
-    text("Player 1", little_font, 15, 435)
-    pygame.draw.rect(screen, (0, 0, 0), (10, 475, Player1MaxHealth*90, 10))
-    pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*90, 15))     
 
-    #Player 2 Health Bar
+    #draws Player 1's name over their health bar
+    text("Player 1", little_font, 15, 435)
+    #Draws a a green bar that decreases in width when the player is damaged
+
+    pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*10, 15))     
+
+ 
+    #draws Player 2's name over their health bar
     text("Player 2", little_font, 15, 487)
-    pygame.draw.rect(screen, (0, 0, 0), (10, 525, Player2MaxHealth*90, 10))
-    pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*90, 15))
+    #Draws a green bar that decreases in width when the player is damaged
+  
+    pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*10, 15))
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
-         # if Player 1 presses Caps Lock, inflict damage on Player 2
-        if keys[pygame.K_CAPSLOCK]:
-            pygame.time.wait(500)
+         # if Player 1 presses left shift, inflict damage on Player 2
+        if keys[pygame.K_LSHIFT]:
+            pygame.time.wait(1500)
             damage(Player1, Player2)
             print(f"P2:{Player2.health}")
-        # if Player 2 presses Return/Enter, inflict damage on Player 1
+        # if Player 2 presses Return/Enter, dddinflict damage on Player 1
         if keys[pygame.K_RETURN]:
-            pygame.time.wait(500)
+            pygame.time.wait(1500)
             damage(Player2, Player1)
             print(f"P1:{Player1.health}")
     for p in players:
