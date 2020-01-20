@@ -87,7 +87,7 @@ def get_key():
             return event.key
         else:
             pass
-
+"""
 def text(text, size, x, y):
     ''' Function displays text on the screen with the specified attributes, with a black shadow'''
     for n in color_list:
@@ -96,7 +96,7 @@ def text(text, size, x, y):
     return
 
 def display_box(screen, message):
-    """Creates a box that displays a message for the user to read"""
+    Creates a box that displays a message for the user to read
     pygame.draw.rect(screen, (0,0,0), ((screen.get_width() / 2) - 100,(screen.get_height() / 2) - 10, 200, 20), 0)
     pygame.draw.rect(screen, (255,255,255), ((screen.get_width() / 2) - 102,(screen.get_height() / 2) - 12, 204,24), 1)
     if len(message) != 0:
@@ -105,7 +105,7 @@ def display_box(screen, message):
 
 
 def UserInput(screen, question):
-    """Function prompts a question to the user in the form of a text box and returns it as a string"""
+    Function prompts a question to the user in the form of a text box and returns it as a string
     current_string = []
     display_box(screen, question + ": " + (str(current_string)))
     while True:
@@ -123,7 +123,7 @@ def UserInput(screen, question):
         display_box(screen, question + ": " + (str(current_string)))
     return (str(current_string))
 
-
+"""
 
 # set the continuation of the scene to True
 scene_cont = True
