@@ -381,13 +381,13 @@ while scene_cont == True:
     #draws Player 1's name over their health bar
     text("Player 1", little_font, 15, 435)
     #Draws a a green bar that decreases in width when the player is damaged
-    pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*15, 15))     
+    pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*10, 15))     
 
  
     #draws Player 2's name over their health bar
     text("Player 2", little_font, 15, 487)
     #Draws a green bar that decreases in width when the player is damaged
-    pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*15, 15))
+    pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*10, 15))
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
