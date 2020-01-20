@@ -37,7 +37,7 @@ start_battle = pygame.image.load("img/startbattle3.png")
 
 # Create classes Player and Button
 class Player:
-    def __init__(self, name, image, x, y, attack, defense, health):
+    def __init__(self, name, image, x, y, attack, defense, health, velocity):
         '''Player is defined by its image, coordinates, and abilities'''
         self.name = name
         self.img = image
@@ -47,6 +47,7 @@ class Player:
         self.attack = attack
         self.defense = defense
         self.health = health
+        self.velocity = velocity
 class Button:
     def __init__(self, img, x, y):
         '''Button is defined by rect and image, as well as if it is active'''
@@ -67,8 +68,8 @@ class Button:
         return random.randint(1,6)
 
 # Create 2 players using Player class
-Player1 = Player("Player 1", Player1Image, 300, 100, 0, 0, 0)
-Player2 = Player("Player 2", Player2Image, 700, 100, 0, 0, 0)
+Player1 = Player("Player 1", Player1Image, 300, 100, 0, 0, 0, 0)
+Player2 = Player("Player 2", Player2Image, 700, 100, 0, 0, 0, 0)
 # create a list of players
 players = [Player1, Player2]
 
@@ -87,7 +88,6 @@ def text(text, size, x, y):
         screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
         
     return
-
 
 # set the continuation of the scene to True
 scene_cont = True
@@ -124,7 +124,7 @@ pygame.time.wait(900)
 #set scene_cont back to True so the next scene will run
 scene_cont = True
 
-# RULES SCREEN
+# RULES SCREEN 1
 while scene_cont == True:
     # display cloud background
     background(cloud_BG)
@@ -166,6 +166,7 @@ pygame.time.wait(900)
 # set value of scene_cont back to True to make the next scene
 scene_cont = True
 
+# RULES SCREEN 2
 while scene_cont == True:
     # display cloud background
     background(cloud_BG)
@@ -268,10 +269,8 @@ for p in players:
                         # Deactivate the button
                         dice_list[i].is_active = False
                 if start_battle_button.has_mouse():
-                    print("BATTLE START")
                     scene_cont = False
             
-
         # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
         if dice_rolling == True:
             text("Dice rolling...", medium_font, 1000, 130)
@@ -295,9 +294,8 @@ for p in players:
         # "flip" screen for this frame and then loop repeats
         pygame.display.flip()
     
-    pygame.time.wait(1000)
+    pygame.time.wait(900)
     scene_cont = True
-
 
 def damage(attacker, defender):
     '''Calculate damage inflicted based on defense and attack stats of each player'''
@@ -319,88 +317,66 @@ while scene_cont == True:
         if event.type == pygame.QUIT:
             # If so, exit the program
             sys.exit()
-    # Draw botth players 
+    # Draw both players 
     screen.blit(Player1.img, Player1.rect)
     screen.blit(Player2.img, Player2.rect)
     
-    screen.blit(Player1Image, Player1.rect)
-    screen.blit(Player2Image, Player2.rect)
-    
-    #creates a list of keys that are being pressed by the players
+    # get state of all the keys, every frame
     keys = pygame.key.get_pressed()
     
-    #Movement
-    #Determines the velocity for player 1
-
-    #if the Player 1 presses left, their character velocity is set to 10 in the negative direction (left)
+    # MOVEMENT
+   
+    # determine the velocity for player 1
+    # if the Player1 presses left, velocity is set to 10 (left)
     if keys[pygame.K_LEFT]:
-        velocity1 = -10
-    #if the Player 1 presses right, their character velocity is set to 10 in the positive direction (right)
+        Player1.velocity = -10
+    # if the Player1 presses right, velocity is set to 10 (right)
     elif keys[pygame.K_RIGHT]:
-        velocity1 = 10
-    #otherwise, the velocity is set to 0
+        Player1.velocity = 10
+    # otherwise, the velocity is set to 0
     else: 
-        velocity1 = 0
-    
-    #if the player1's x position is the right border of the display, the velocity of the character is set to 10 to the left to prevent the player from moving past the border
-    if Player1.rect.x > 1200:
-        velocity1 = -10
-    #if the player1's x position is the left border of the display, the velocity of the character is set to 10 to the right to prevent the player from moving past the border
-    if Player1.rect.x < 0:
-        velocity1 = 10
+        Player1.velocity = 0
 
-
-    #Determines the velocity for player 2 (Based on WASD key movement layout)
-
-    #if the Player 2 presses a, their character velocity is set to 10 in the negative direction (left)
+    # determine the velocity for Player2
+    # If the Player2 presses A, velocity is set to 10 (left)
     if keys[pygame.K_a]:
-        velocity2 = -10
-    #if the Player 2 presses d, their character velocity is set to 10 in the positive direction (right)
+        Player2.velocity = -10
+    # If the Player2 presses D, velocity is set to 10 (right)
     elif keys[pygame.K_d]:
-         velocity2 = 10
-    #otherwise, the velocity is set to 0
+        Player2.velocity = 10
+    # Otherwise, the velocity is set to 0
     else: 
-        velocity2 = 0
+        Player2.velocity = 0
     
+    # Change player positions based on velocities and prevent players from leaving screen
+    for p in players:
+        if p.rect.x > 1100:
+            p.velocity = -0.5
+        if p.rect.x < 0:
+            p.velocity = 0.5
+        p.rect.x += p.velocity
 
-    #if the player2's x position is the right border of the display, the velocity of the character is set to 10 to the left to prevent the player from moving past the border
-    if Player2.rect.x > 1200:
-        velocity2 = -10
-    
-    #if the player2's x position is the left border of the display, the velocity of the character is set to 10 to the right to prevent the player from moving past the border
-    if Player2.rect.x < 0:
-        velocity2 = 10
-        
-    #Changes the players' x positions according to the respective velocity
-    Player1.rect.x += velocity1
-    Player2.rect.x += velocity2
-
-
-    #Health Bars
-
-    #draws Player 1's name over their health bar
+    # HEALTH BARS
+    # Draws Player 1's name over their health bar
     text("Player 1", little_font, 15, 435)
-    #Draws a a green bar that decreases in width when the player is damaged
+    # Draws a a green bar that decreases in width when the player is damaged
     pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*10, 15))     
 
- 
-    #draws Player 2's name over their health bar
+    # Draws Player 2's name over their health bar
     text("Player 2", little_font, 15, 487)
-    #Draws a green bar that decreases in width when the player is damaged
+    # Draws a green bar that decreases in width when the player is damaged
     pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*10, 15))
 
     # check if players are colliding
     if Player1.rect.colliderect(Player2.rect) == True:
          # if Player 1 presses left shift, inflict damage on Player 2
         if keys[pygame.K_LSHIFT]:
-            pygame.time.wait(1500)
+            pygame.time.wait(500)
             damage(Player1, Player2)
-            print(f"P2:{Player2.health}")
         # if Player 2 presses Return/Enter, dddinflict damage on Player 1
         if keys[pygame.K_RETURN]:
-            pygame.time.wait(1500)
+            pygame.time.wait(500)
             damage(Player2, Player1)
-            print(f"P1:{Player1.health}")
     for p in players:
         if p.health <= 0:
             text(f"{players[players.index(p)-1].name} wins!", big_font, 470, 100)
