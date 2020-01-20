@@ -80,29 +80,48 @@ def background(image):
     screen.blit(image, (0,0))
     return
 
+def get_key():
+    while True:
+        event = pygame.event.poll()
+        if event.type == pygame.KEYDOWN:
+            return event.key
+        else:
+            pass
+
 def text(text, size, x, y):
     ''' Function displays text on the screen with the specified attributes, with a black shadow'''
     for n in color_list:
         screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))
+        
     return
+
+def display_box(screen, message):
+    """Creates a box that displays a message for the user to read"""
+    pygame.draw.rect(screen, (0,0,0), ((screen.get_width() / 2) - 100,(screen.get_height() / 2) - 10, 200, 20), 0)
+    pygame.draw.rect(screen, (255,255,255), ((screen.get_width() / 2) - 102,(screen.get_height() / 2) - 12, 204,24), 1)
+    if len(message) != 0:
+        text(message, little_font, (screen.get_width() / 2) - 102,(screen.get_height() / 2) - 12)
+    pygame.display.flip()
+
 
 def UserInput(screen, question):
     """Function prompts a question to the user in the form of a text box and returns it as a string"""
     current_string = []
-    display_box(screen, question + ": " + string.join(current_string,""))
+    display_box(screen, question + ": " + (str(current_string)))
     while True:
-        InputKey = pygame.key.get_pressed()
-        if InputKey[pygame.K_BACKSPACE]:
+        InputKey = get_key()
+        if InputKey == pygame.K_BACKSPACE:
             current_string = current_string[0:-1]
-        elif InputKey[pygame.K_RETURN]:
+        elif InputKey == pygame.K_RETURN:
             break
-        elif InputKey[pygame.K_ESCAPE]:
+        elif InputKey == pygame.K_ESCAPE:
             break
-        elif InputKey[pygame.K_SPACE]:
+        elif InputKey == pygame.K_SPACE:
             current_string.append("_")
-        elif InputKey <= 255:
+        elif InputKey <= 127:
             current_string.append(chr(InputKey))
-        display_box(screen, question + ": " + string.join(current_string, ""))
+        display_box(screen, question + ": " + (str(current_string)))
+    return (str(current_string))
 
 
 
@@ -113,6 +132,10 @@ scene_cont = True
 while scene_cont == True:
     # display cloud background
     background(cloud_BG)
+
+    UserInput(screen, "What is your name?")
+
+
 
     # get state of all the keys, every frame
     keys = pygame.key.get_pressed()
@@ -234,6 +257,7 @@ for p in players:
                         dice_list[i].is_active = False
                 if start_battle_button.has_mouse():
                     scene_cont = False
+            
 
         # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
         if dice_rolling == True:
