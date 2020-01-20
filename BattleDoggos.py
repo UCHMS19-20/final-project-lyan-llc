@@ -326,24 +326,26 @@ while scene_cont == True:
     screen.blit(Player1Image, Player1.rect)
     screen.blit(Player2Image, Player2.rect)
     
-
+    #creates a list of keys that are being pressed by the players
     keys = pygame.key.get_pressed()
     
     #Movement
     #Determines the velocity for player 1
 
- 
-    #Have to put in the borders so that if the player tries to escape the screen they are bounced back
+    #if the Player 1 presses left, their character velocity is set to 10 in the negative direction (left)
     if keys[pygame.K_LEFT]:
         velocity1 = -10
+    #if the Player 1 presses right, their character velocity is set to 10 in the positive direction (right)
     elif keys[pygame.K_RIGHT]:
         velocity1 = 10
+    #otherwise, the velocity is set to 0
     else: 
         velocity1 = 0
     
+    #if the player1's x position is the right border of the display, the velocity of the character is set to 10 to the left to prevent the player from moving past the border
     if Player1.rect.x > 1200:
         velocity1 = -10
-    
+    #if the player1's x position is the left border of the display, the velocity of the character is set to 10 to the right to prevent the player from moving past the border
     if Player1.rect.x < 0:
         velocity1 = 10
 
@@ -379,14 +381,12 @@ while scene_cont == True:
     #draws Player 1's name over their health bar
     text("Player 1", little_font, 15, 435)
     #Draws a a green bar that decreases in width when the player is damaged
-
     pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*15, 15))     
 
  
     #draws Player 2's name over their health bar
     text("Player 2", little_font, 15, 487)
     #Draws a green bar that decreases in width when the player is damaged
-  
     pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*15, 15))
 
     # check if players are colliding
