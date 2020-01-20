@@ -30,7 +30,7 @@ def background(image):
     return
 
 battle_BG = pygame.image.load("img/BDField3.jpg")
-cloud_BG = pygame.image.load("img/AbilitiesBG2.png")
+cloud_BG = pygame.image.load("img/CloudBG.jpg")
 scene_cont = True
 
 black = pygame.Color(0, 0, 0)
@@ -62,17 +62,29 @@ def damage(attacker, defender):
     attacker.health = attacker.health - damage
     return attacker.health
 
-print(Player1.health)
-print(Player2.health)
-print(damage(Player1, Player2))
-print(damage(Player2, Player1))
-print(damage(Player1, Player2))
-print(damage(Player2, Player1))
-print(damage(Player1, Player2))
-print(damage(Player2, Player1))
-print(damage(Player1, Player2))
-print(damage(Player2, Player1))
+# print(Player1.health)
+# print(Player2.health)
+# print(damage(Player1, Player2))
+# print(damage(Player2, Player1))
+# print(damage(Player1, Player2))
+# print(damage(Player2, Player1))
+# print(damage(Player1, Player2))
+# print(damage(Player2, Player1))
+# print(damage(Player1, Player2))
+# print(damage(Player2, Player1))
 
+rules_text_1 = [
+    "This is a two-player game. You will both roll virtual dice to get random"
+    "levels of Attack, Defense, and Health on a scale of 1-6. Then, the battle"
+    "begins and you attack each other!"
+    ""
+    "Player 1 moves back and forth using the A and D keys, and attacks with"
+    "the Caps Lock key. Player 2 uses the left and right arrows,"
+    "and attacks with the enter key."
+] 
+for n in rules_text_1:
+    print(n)
+    
 # print(Player1.health - P1Dam)
 # print(Player2.health - P2Dam)
 
