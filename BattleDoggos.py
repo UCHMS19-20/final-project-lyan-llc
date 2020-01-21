@@ -3,7 +3,7 @@ import sys
 import pygame
 import random
 import time
-import string
+
 
 # Initialize pygame so it runs in the background and manages things
 pygame.init()
@@ -197,7 +197,7 @@ while scene_cont == True:
         text(n, medium_font, 50, rules_text_2.index(n)*40+120)
     
     text("Press enter to continue.", little_font, 50, 450)
-
+    
     pygame.display.flip()
     
 # wait 1 second so it doesn't register the click for the next scene accidentally
@@ -355,7 +355,7 @@ while scene_cont == True:
             p.velocity = 0.5
         p.rect.x += p.velocity
 
-    # HEALTH BARS
+    # HEALTH BARSy
     # Draws Player 1's name over their health bar
     text("Player 1", little_font, 15, 435)
     # Draws a a green bar that decreases in width when the player is damaged
