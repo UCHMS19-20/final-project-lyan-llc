@@ -327,10 +327,10 @@ while scene_cont == True:
    
     # determine the velocity for player 1
     # if the Player1 presses left, velocity is set to 10 (left)
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_a]:
         Player1.velocity = -10
     # if the Player1 presses right, velocity is set to 10 (right)
-    elif keys[pygame.K_RIGHT]:
+    elif keys[pygame.K_d]:
         Player1.velocity = 10
     # otherwise, the velocity is set to 0
     else: 
@@ -338,10 +338,10 @@ while scene_cont == True:
 
     # determine the velocity for Player2
     # If the Player2 presses A, velocity is set to 10 (left)
-    if keys[pygame.K_a]:
+    if keys[pygame.K_LEFT]:
         Player2.velocity = -10
     # If the Player2 presses D, velocity is set to 10 (right)
-    elif keys[pygame.K_d]:
+    elif keys[pygame.K_RIGHT]:
         Player2.velocity = 10
     # Otherwise, the velocity is set to 0
     else: 
