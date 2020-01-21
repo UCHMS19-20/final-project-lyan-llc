@@ -4,7 +4,6 @@ import pygame
 import random
 import time
 
-
 # Initialize pygame so it runs in the background and manages things
 pygame.init()
 
@@ -17,10 +16,10 @@ white = pygame.Color(255, 255, 255)
 color_list = [black, white]
 
 # Create font objects
-huge_font = pygame.font.SysFont("Comicsansms", 150)
-big_font = pygame.font.SysFont("Comicsansms", 75)
-medium_font = pygame.font.SysFont("Comicsansms", 50)
-little_font = pygame.font.SysFont("Comicsansms", 25)
+huge_font = pygame.font.Font("Good Morning.ttf", 70)
+big_font = pygame.font.Font("Original Quality DEMO.otf", 75)
+medium_font = pygame.font.Font("Original Quality DEMO.otf", 45)
+little_font = pygame.font.Font("Original Quality DEMO.otf", 25)
 
 # LOAD ALL IMAGES
 # background images and create rects
@@ -48,6 +47,7 @@ class Player:
         self.defense = defense
         self.health = health
         self.velocity = velocity
+
 class Button:
     def __init__(self, img, x, y):
         '''Button is defined by rect and image, as well as if it is active'''
@@ -82,10 +82,10 @@ def background(image):
     screen.blit(image, (0,0))
     return
 
-def text(text, size, x, y):
+def text(text, size, offset, x, y):
     ''' Function displays text on the screen with the specified attributes, with a black shadow'''
     for n in color_list:
-        screen.blit(size.render(text, True, n), (x+3*color_list.index(n), y))    
+        screen.blit(size.render(text, True, n), (x+offset*color_list.index(n), y))    
     return
 
 # set the continuation of the scene to True
@@ -109,9 +109,9 @@ while scene_cont == True:
                 scene_cont = False
 
     # display title screen text
-    text("Welcome to...", medium_font, 500, 100)
-    text("BATTLE DOGGOS", huge_font, 200, 200)
-    text("Press enter to continue.", little_font, 500, 400)
+    text("Welcome to...", medium_font, 4, 500, 100)
+    text("BATTLE DOGGOS", huge_font, 6, 200, 200)
+    text("Press enter to continue.", little_font, 2, 500, 400)
     
     
     # "flip" screen for this frame and then loop repeats
@@ -141,7 +141,7 @@ while scene_cont == True:
             scene_cont = False
     
     # display rules
-    text("RULES", big_font, 50, 50)
+    text("RULES", big_font, 5, 50, 50)
     rules_text_1 = [
         "This is a two-player game. You will both roll virtual dice to get random",
         "levels of Attack, Defense, and Health on a scale of 1-6. Then, the battle",
@@ -153,9 +153,9 @@ while scene_cont == True:
     ] 
     # display text in lines that fit on the screen and are evenly spaced
     for n in rules_text_1:
-        text(n, medium_font, 50, rules_text_1.index(n)*40+120)
+        text(n, medium_font, 4, 50, rules_text_1.index(n)*40+130)
     
-    text("Press enter to continue.", little_font, 50, 450)
+    text("Press enter to continue.", little_font, 2, 50, 450)
     # "flip" screen for this frame and then loop repeats
     pygame.display.flip()
 
@@ -183,7 +183,7 @@ while scene_cont == True:
             scene_cont = False
     
     # display second set of rules
-    text("RULES", big_font, 50, 50)
+    text("RULES", big_font, 5, 50, 50)
     rules_text_2 = [
         "You must be colliding with each other to attack. Attacking decreases",
         "your opponent's health. If their defense is strong, your attack",
@@ -194,9 +194,9 @@ while scene_cont == True:
     ]
     # display text in lines that fit on the screen and are evenly spaced
     for n in rules_text_2:
-        text(n, medium_font, 50, rules_text_2.index(n)*40+120)
+        text(n, medium_font, 4, 50, rules_text_2.index(n)*40+130)
     
-    text("Press enter to continue.", little_font, 50, 450)
+    text("Press enter to continue.", little_font, 2, 50, 450)
     
     pygame.display.flip()
     
@@ -231,11 +231,11 @@ for p in players:
         screen.blit(p.img, (100, 100))
 
         # display text
-        text(f"{p.name}", big_font, 75, 50)
-        text(f"Click the dice to get your random stats!", medium_font, 75, 100)
-        text(f"Attack: {p.attack}", little_font, 600, 180)
-        text(f"Defense: {p.defense}", little_font, 600, 280)
-        text(f"Health: {p.health}", little_font, 600, 380)
+        text(f"{p.name}", big_font, 5, 75, 40)
+        text(f"Click the dice to get your random stats!", medium_font, 4, 75, 100)
+        text(f"Attack: {p.attack}", little_font, 2, 600, 180)
+        text(f"Defense: {p.defense}", little_font, 2, 600, 280)
+        text(f"Health: {p.health}", little_font, 2, 600, 380)
 
         # set the abilities to the values in the dice_values list
         p.attack, p.defense, p.health = dice_values
@@ -272,22 +272,22 @@ for p in players:
             
         # if the dice is in the process of rolling, display "Dice rolling..." and wait 3 seconds
         if dice_rolling == True:
-            text("Dice rolling...", medium_font, 1000, 130)
+            text("Dice rolling...", medium_font, 4, 1000, 130)
             pygame.display.flip()
             pygame.time.wait(1000)
             # set back to False so the program doesn't pause again until another die is rolled
             dice_rolling = False 
 
         if p == Player1 and (dice_list[0].is_active or dice_list[1].is_active or dice_list[2].is_active) == False:
-            text(f"Player {players.index(p)+1} profile complete!", medium_font, 850, 350)
-            text("Press enter to continue.", little_font, 1075, 400)
+            text(f"Player {players.index(p)+1} profile complete!", medium_font, 4, 850, 350)
+            text("Press enter to continue.", little_font, 2, 1075, 400)
             if keys[pygame.K_RETURN]:
                 scene_cont = False
 
         # only runs code for "Start Battle" button if the screen is for Player 2
         if p == Player2 and (dice_list[0].is_active or dice_list[1].is_active or dice_list[2].is_active) == False:
              # if all dice have been clicked, draw the "Start Battle!" buttton
-            text(f"Player {players.index(p)+1} profile complete!", medium_font, 850, 350)
+            text(f"Player {players.index(p)+1} profile complete!", medium_font, 4, 850, 350)
             screen.blit(start_battle_button.img, start_battle_button.rect)
 
         # "flip" screen for this frame and then loop repeats
@@ -357,12 +357,12 @@ while scene_cont == True:
 
     # HEALTH BARSy
     # Draws Player 1's name over their health bar
-    text("Player 1", little_font, 15, 435)
+    text("Player 1", little_font, 2, 15, 435)
     # Draws a a green bar that decreases in width when the player is damaged
     pygame.draw.rect(screen, (0, 255, 0), (10, 475, Player1.health*10, 15))     
 
     # Draws Player 2's name over their health bar
-    text("Player 2", little_font, 15, 487)
+    text("Player 2", little_font, 2, 15, 487)
     # Draws a green bar that decreases in width when the player is damaged
     pygame.draw.rect(screen, (0, 255, 0), (10, 525, Player2.health*10, 15))
 
@@ -378,7 +378,7 @@ while scene_cont == True:
             damage(Player2, Player1)
     for p in players:
         if p.health <= 0:
-            text(f"{players[players.index(p)-1].name} wins!", big_font, 470, 100)
+            text(f"{players[players.index(p)-1].name} wins!", big_font, 5, 470, 100)
             pygame.display.flip()
             pygame.time.wait(3000)
             scene_cont = False
@@ -391,7 +391,7 @@ scene_cont = True
 # END-OF-GAME SCREEN
 while scene_cont == True:
     background(cloud_BG)
-    text("The End!", huge_font, 400, 200)
+    text("The End!", huge_font, 6, 400, 200)
     pygame.display.flip()
     pygame.time.wait(5000)
     sys.exit()
