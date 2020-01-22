@@ -13,8 +13,13 @@ In the battle screen, the players start on opposite sides of the screen, and are
 ### Controls:
 Player 1 moves back and forth using the A and D keys, and attacks with the Left Shift key. Player 2 uses the left and right arrows to move and attacks with the enter/return key. 
 
-### Character Designs: SUPER CUTE
+## Character Designs: SUPER CUTE
 Player 1's character is the brown dog, while Player 2's character is the white dog. 
+
+### Brown Dog:
+https://github.com/UCHMS19-20/final-project-lyan-llc/blob/master/Heidi.png
+### White Dog:
+https://github.com/UCHMS19-20/final-project-lyan-llc/blob/master/Remi.png
 
 ## Recommendations:
 * The person who is on the left facing the screen (controlling the A and D keys) should be Player 1. The person on the right facing the screen (controlling the arrow keys) should be Player 2. It is easier to keep track of who is who on the screen that way. 
