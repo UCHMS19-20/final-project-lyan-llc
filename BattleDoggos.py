@@ -36,6 +36,7 @@ start_battle = pygame.image.load("img/startbattle3.png")
 
 # Create classes Player and Button
 class Player:
+    """ Class for Players 1 and 2 """
     def __init__(self, name, image, x, y, attack, defense, health, velocity):
         '''Player is defined by its image, coordinates, and abilities'''
         self.name = name
@@ -49,6 +50,7 @@ class Player:
         self.velocity = velocity
 
 class Button:
+    """User clicks on images to execute actions"""
     def __init__(self, img, x, y):
         '''Button is defined by rect and image, as well as if it is active'''
         self.img = img
@@ -373,11 +375,12 @@ while scene_cont == True:
         if keys[pygame.K_LSHIFT]:
             pygame.time.wait(500)
             damage(Player1, Player2)
-        # if Player 2 presses Return/Enter, dddinflict damage on Player 1
+        # if Player 2 presses Return/Enter, inflict damage on Player 1
         if keys[pygame.K_RETURN]:
             pygame.time.wait(500)
             damage(Player2, Player1)
     for p in players:
+        # if the player's health is depleted, the winner is displayed and the game ends
         if p.health <= 0:
             text(f"{players[players.index(p)-1].name} wins!", big_font, 5, 470, 100)
             pygame.display.flip()
