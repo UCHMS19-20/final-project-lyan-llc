@@ -2,13 +2,13 @@
 
 ## Description:
 
-Battle Doggos is a 2 player classic fighter style game. Two dogs duke it out in a fast-paced, heart-racing game. Victory depends on the player's randomized stats, reflexes, finger speed, and strategy. 
+Battle Doggos is a 2 player classic fighter style game. Two dogs duke it out in a fast-paced, heart-racing game. Victory depends on the player's randomized stats, reflexes, finger speed, and strategy. The goal of the game is to defeat the other player
 
 ### Stats:
 Each player has three stats, attack, defense, and health. Health is the max amount of damage the player can take, attack is how much damage the player can do, and defense is the amount of incoming damage that is negated. The stats are determined through three die rolls, one die roll for each stat. The stat levels are rated 1-6, where 1 is the lowest level and 6 is the highest level. After each player has their stats, the players enter the battle screen. 
 
 ### Battle Screen
-In the battle screen, the players start on opposite sides of the screen, and are free to move left or right. The players can monitor their health by looking at their labeled health bars at the bottom of the screen. The players can only attack each other while their characters are colliding.
+In the battle screen, the players start on opposite sides of the screen, and are free to move left or right. The players can monitor their health by looking at their labeled health bars at the bottom of the screen. The players can only attack each other while their characters are colliding. The game ends when one of the player's health reaches 0.
 
 ### Controls:
 Player 1 moves back and forth using the A and D keys, and attacks with the Left Shift key. Player 2 uses the left and right arrows to move and attacks with the enter/return key. 
