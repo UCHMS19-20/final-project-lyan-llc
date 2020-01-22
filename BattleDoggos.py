@@ -17,9 +17,9 @@ color_list = [black, white]
 
 # Create font objects
 huge_font = pygame.font.Font("Good Morning.ttf", 70)
-big_font = pygame.font.Font("Original Quality DEMO.otf", 75)
-medium_font = pygame.font.Font("Original Quality DEMO.otf", 45)
-little_font = pygame.font.Font("Original Quality DEMO.otf", 25)
+big_font = pygame.font.Font("Doctor Soos Bold 2.1.ttf", 75)
+medium_font = pygame.font.Font("Doctor Soos Bold 2.1.ttf", 45)
+little_font = pygame.font.Font("Doctor Soos Bold 2.1.ttf", 25)
 
 # LOAD ALL IMAGES
 # background images and create rects
@@ -267,6 +267,7 @@ for p in players:
                         dice_rolling = True
                         # Deactivate the button
                         dice_list[i].is_active = False
+                        print(dice_values)
                 if start_battle_button.has_mouse():
                     scene_cont = False
             
