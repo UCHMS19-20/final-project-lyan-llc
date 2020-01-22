@@ -1,45 +1,42 @@
-# Final Documentation
+# Documentation - BattleDoggos
 
-All documentation is to be included in your repository.
+## Description:
 
-Due at final exam period:
+Battle Doggos is a 2 player classic fighter style game. Two dogs duke it out in a fast-paced heart-racing game. Victory depends on the player's randomized stats, finger speed, and strategy. 
 
-* Code - fully commented!
-* Presentation
-* Flowchart
-* README/GitHub Pages website
+### Stats:
+Each player has three stats, attack, defense, and health. Health is the max amount of damage the player can take, attack is how much damage the player can do, and defense is the amount of incoming damage that is negated. The stats are determined through three die rolls, one die roll for each stat. The stat levels are rated 1-6, where 1 is the lowest level and 6 is the highest level. After each player has their stats, the players enter the battle screen. 
 
-## Documentation Details
+### Battle Screen
+In the battle screen, the players start on opposite sides of the screen, and are free to move left or right. They players can monitor ther health by looking at their respective labeled health bar at the bottom of the screen. The players can only attack each other when their characters are colliding
 
-### Website
+### Controls:
+Player 1 moves back and forth using the A and D keys, and attacks with the Left Shift key. Player 2 uses the left and right arrows to move and attacks with the enter/return key. 
 
-I will go over how to set this up, but I promise it's simple! You will create a GitHub Pages site containing:
+## Character Designs: SUPER CUTE
+Player 1's character is the brown dog, while Player 2's character is the white dog. 
 
-* More detailed description of your game
-* Citations of your sources
-* Flowchart (or link to it)
-* Presentation (or link to it)
-* Anything else you think may be relevant, such as directions for playing your game
+### Brown Dog:
+https://github.com/UCHMS19-20/final-project-lyan-llc/blob/master/Heidi.png
+### White Dog:
+https://github.com/UCHMS19-20/final-project-lyan-llc/blob/master/Remi.png
 
-Please note that this may be a single page, but can be split into multiple pages for better organization. The goal is to make it easy to find all the relevant information about your project in one place.
+## Recommendations:
+* The person who is on the left facing the screen (controlling the A and D keys) should be Player 1. The person on the right facing the screen (controlling the arrow keys) should be Player 2. It is easier to keep track of who is who on the screen that way. 
+* Program should be run on a good computer for a better experience
+* Consider playing multiple times for games with different combinations of stats!
 
-### Flowchart
+## Citations: 
+“Backgrounds.” Battle Cats Wiki, battle-cats.fandom.com/wiki/Backgrounds.
 
-* May be created digitally or by hand
-* Should depict how the code runs
-* If you need help, see me
-* Please ensure that your flowchart is clear, easy to read, and does not require any special permissions to access. I strongly recommend a `.jpg` or `.png` file if you are scanning a hand-drawn flowchart, or a `.pdf` file for a digital flowchart
+camilamarcely1, et al. “Photo by @Chickentato.” PicsArt, 29 Dec. 2017, picsart.com/i/image-aesthetic-pink-clouds-252266489016202.
 
-### Code
+ClipartPNG.com. “Dice Red PNG Clip Art - Best WEB Clipart.” Cliaprt PNG Pictures, clipartpng.com/?2656,dice-red-png-clip-art.
 
-* Remember to comment your code
-* Each function and class should have a docstring at the start of the block of code to describe what it does
+“Scoring and Health Bars.” Techwithtim.net, techwithtim.net/tutorials/game-development-with-python/pygame-tutorial/scoring-health-bars/.
 
-### Presentation
+## Flowchart:
+https://drive.google.com/file/d/1xwLZ7Oc3W2yvM9G27kTxefnCQS7cWPVF/view?usp=sharing
 
-* 3-4 minutes
-* Please include:
-    * Game demo
-    * Your favorite feature/what you're most proud of
-    * What you learned while doing this
-* Your class will have an opportunity to ask questions
+## Presentation:
+https://docs.google.com/presentation/d/1bKd3e91XxRRPIgXbnxKlNECxE6lianr_GC300A4f64k/edit#slide=id.g6dd4cdd796_1_189
