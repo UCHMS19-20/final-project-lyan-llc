@@ -191,7 +191,7 @@ while scene_cont == True:
         "your opponent's health. If their defense is strong, your attack",
         "becomes weaker.",
         "",
-        "The health bar at the top will show how much health you have left. The",
+        "The health bar at the bottom will show how much health you have left. The",
         "first to 0 health loses. Good luck!"
     ]
     # display text in lines that fit on the screen and are evenly spaced
