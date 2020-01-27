@@ -269,7 +269,7 @@ for p in players:
                         dice_rolling = True
                         # Deactivate the button
                         dice_list[i].is_active = False
-                        print(dice_values)
+                # if start battle button is pressed, end scene
                 if start_battle_button.has_mouse():
                     scene_cont = False
             
@@ -395,7 +395,7 @@ scene_cont = True
 # END-OF-GAME SCREEN
 while scene_cont == True:
     background(cloud_BG)
-    text("The End!", huge_font, 6, 400, 200)
+    text("The End!", big_font, 6, 500, 200)
     pygame.display.flip()
     pygame.time.wait(5000)
     sys.exit()
